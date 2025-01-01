@@ -8,14 +8,14 @@ import java.util.StringTokenizer;
 public class N7568 {
     public static void main(String[] args) {
         N7568 n7568 = new N7568();
-        n7568.init();
-        n7568.printScore();
+        n7568.initializeData();
+        n7568.calculateAndPrintScores();
     }
 
     private Pair[] pairs;
     private int[] scores;
 
-    public void init() {
+    public void initializeData() {
         try (BufferedReader bf = new BufferedReader(new InputStreamReader(System.in))) {
             int numPerson = Integer.parseInt(bf.readLine());
             scores = new int[numPerson];
@@ -36,7 +36,7 @@ public class N7568 {
         }
     }
 
-    public void printScore() {
+    public void calculateAndPrintScores() {
         for (int i=0; i<pairs.length-1; i++) {
             for (int j=i+1; j<pairs.length; j++) {
                 int compare = compareScore(pairs[i], pairs[j]);
@@ -54,14 +54,10 @@ public class N7568 {
     }
 
     private int compareScore(Pair pair, Pair pair1) {
-        if (pair.x > pair1.x) {
-            if (pair.y > pair1.y) {
-                return 1;
-            }
-        } else if (pair.x < pair1.x) {
-            if (pair.y < pair1.y) {
-                return -1;
-            }
+        if (pair.x > pair1.x && pair.y > pair1.y) {
+            return 1;
+        } else if (pair.x < pair1.x && pair.y < pair1.y) {
+            return -1;
         }
         return 0;
     }
